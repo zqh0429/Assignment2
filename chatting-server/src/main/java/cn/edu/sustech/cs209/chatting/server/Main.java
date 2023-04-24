@@ -19,23 +19,26 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Main{
-    public static Map<String,Socket> clientMap;
-    public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(30429);
-        System.out.println("Waiting");
-        clientMap = new ConcurrentHashMap<>();
-        ArrayList<String> fileSendName = new ArrayList<>();
-        List<byte[]> fileInfo = new ArrayList<>();
-        while (true){
-            try{
-                Socket socket = serverSocket.accept();
-                System.out.println("Starting server"+socket);
-                System.out.println(1);
-                new Thread(new ChatService(socket,clientMap,fileSendName,fileInfo)).start();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+public class Main {
+
+  public static Map<String, Socket> clientMap;
+
+  public static void main(String[] args) throws IOException {
+    ServerSocket serverSocket = new ServerSocket(30429);
+    System.out.println("Waiting");
+    clientMap = new ConcurrentHashMap<>();
+    ArrayList<String> fileSendName = new ArrayList<>();
+    List<byte[]> fileInfo = new ArrayList<>();
+    List<Long> fileLength = new ArrayList<>();
+    while (true) {
+      try {
+        Socket socket = serverSocket.accept();
+        System.out.println("Starting server" + socket);
+        System.out.println(1);
+        new Thread(new ChatService(socket, clientMap, fileSendName, fileInfo, fileLength)).start();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
+  }
 }
