@@ -18,9 +18,18 @@
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="cn.edu.sustech.cs209.chatting.client.Controller">
     <MenuBar VBox.vgrow="NEVER">
+
+<!--        <Menu mnemonicParsing="false" onAction="#createPrivateChat" text="New Private Chat"/>-->
+<!--        <Menu mnemonicParsing="false" onAction="#createGroupChat" text="New Group Chat"/>-->
+<!--        <Menu mnemonicParsing="false" onAction="#refresh" text="Refresh"/>-->
         <Menu mnemonicParsing="false" text="Chat">
             <MenuItem mnemonicParsing="false" onAction="#createPrivateChat" text="New Private Chat"/>
             <MenuItem mnemonicParsing="false" onAction="#createGroupChat" text="New Group Chat"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Tools">
+            <MenuItem mnemonicParsing="false" onAction="#refresh" text="Refresh"/>
+            <MenuItem mnemonicParsing="false"  onAction="#selectAndSendFile" text="Upload File"/>
+            <MenuItem mnemonicParsing="false"  onAction="#receiveFile" text="Download File"/>
         </Menu>
     </MenuBar>
     <SplitPane dividerPositions="0.25" focusTraversable="true" VBox.vgrow="ALWAYS">
@@ -29,8 +38,12 @@
             <ListView fx:id="chatContentList" prefHeight="200.0" prefWidth="200.0"/>
             <HBox prefHeight="100.0" prefWidth="200.0">
                 <TextArea fx:id="inputArea" prefHeight="138.0" prefWidth="624.0" HBox.hgrow="ALWAYS"/>
-                <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#doSendMessage"
-                        text="Send" HBox.hgrow="ALWAYS"/>
+                <VBox prefHeight="100.0" prefWidth="200.0">
+                    <Button prefHeight="50" prefWidth="312" mnemonicParsing="false" onAction="#doSendMessage"
+                      text="SendInPrivate" HBox.hgrow="ALWAYS"/>
+                    <Button prefHeight="50" prefWidth="312" mnemonicParsing="false" onAction="#doSendGroupMessage"
+                      text="SendInGroup" HBox.hgrow="ALWAYS"/>
+                </VBox>
             </HBox>
         </SplitPane>
     </SplitPane>
@@ -39,7 +52,7 @@
             <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
         </padding>
         <Label fx:id="currentUsername" maxHeight="1.7976931348623157E308"
-               text="Current User: USERNAME" HBox.hgrow="ALWAYS">
+               text="Current User:" HBox.hgrow="ALWAYS">
             <font>
                 <Font size="11.0" fx:id="x3"/>
             </font>
@@ -48,6 +61,6 @@
             </textFill>
         </Label>
         <Pane HBox.hgrow="ALWAYS"/>
-        <Label fx:id="currentOnlineCnt" font="$x3" text="Online: 1" textFill="$x4" HBox.hgrow="NEVER"/>
+        <Label fx:id="currentOnlineCnt" font="$x3" text="Online:" textFill="$x4" HBox.hgrow="NEVER"/>
     </HBox>
 </VBox>
